@@ -24,7 +24,6 @@ public class Messagesender extends AsyncTask<byte[],Void,Void> {
             if(socket == null) {
                 socket = new Socket(host, port);
             }
-
             OutputStream outputStream = socket.getOutputStream();
 
             outputStream.write(bytes[0]);
