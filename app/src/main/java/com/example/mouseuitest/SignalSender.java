@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 public class SignalSender {
     public static void sendMouseData(int x, int y, boolean leftButton, boolean rightButton){
-        Messagesender task = new Messagesender("192.168.1.3",7800);
+        Messagesender task = new Messagesender("192.168.1.2",7800);
         byte[] data = createMouseData(x, y, leftButton, rightButton);
         task.execute(data);
     }
