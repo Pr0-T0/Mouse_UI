@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set OnClickListener on the leftButton to handle left clicks
-        leftButton.setOnClickListener(new View.OnClickListener() {
+        /*leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SignalSender.sendMouseData(0, 0, true, false); // Send left click data to the computer
@@ -79,6 +79,40 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SignalSender.sendMouseData(0, 0, false, true); // Send right click data to the computer
             }
+        });*/
+        // Set OnTouchListener on the leftButton to handle left clicks
+        leftButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: // Button pressed down
+                        SignalSender.sendMouseData(0, 0, true, false); // Send left click data to the computer
+                        break;
+
+                    case MotionEvent.ACTION_UP: // Button released
+                        SignalSender.sendMouseData(0, 0, false, false); // Send mouse data to stop left click
+                        break;
+                }
+                return true;
+            }
         });
+
+// Set OnTouchListener on the rightButton to handle right clicks
+        rightButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: // Button pressed down
+                        SignalSender.sendMouseData(0, 0, false, true); // Send right click data to the computer
+                        break;
+
+                    case MotionEvent.ACTION_UP: // Button released
+                        SignalSender.sendMouseData(0, 0, false, false); // Send mouse data to stop right click
+                        break;
+                }
+                return true;
+            }
+        });
+
     }
 }
